@@ -11,14 +11,14 @@ bot = telebot.TeleBot('1163794464:AAFygKq8I_5geMng2myONjIRIy60-ePzj30')
 def start_message(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     keyboard.row(
-        telebot.types.InlineKeyboardButton('Краткая история меня', callback_data='about-me'),
+        telebot.types.InlineKeyboardButton('Краткая история обо мне', callback_data='about-me'),
     )
     keyboard.row(
         telebot.types.InlineKeyboardButton('Социальные сети', callback_data='social'),
         telebot.types.InlineKeyboardButton('Связь со мной', callback_data='contact-with-me')
     )
 
-    bot.send_message(message.chat.id, 'Привет, ' + message.from_user.first_name + '\n Выбери, что бы ты хотел узнать:\n', reply_markup=keyboard)
+    bot.send_message(message.chat.id, 'Привет, ' + message.from_user.first_name + '\n Чтобы ты хотел узнать?\n', reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def iq_callback(query):
@@ -73,14 +73,18 @@ def get_diff_full_age(date):
 
 def send_social_network(query):
     bot.send_message(query.message.chat.id,
-                     text(                                               
-                   '*телеграм* artur_turundaev\n')
+                     '*Instagram*: instagram.com/arturundaev\n' +
+                     '*Facebook*: facebook.com/profile.php?id=100013703143653\n' +
+                     '*VK*: vk.com/@turundaev\n' +
+                     '*LinkedIn*: linkedin.com/in/arturturundaev'
                      , parse_mode=ParseMode.MARKDOWN)
 
 def send_contact_info(query):
     bot.send_message(query.message.chat.id,
-    'телефон: \n'+
-                     'sdfgdfg'
-    , parse_mode=ParseMode.MARKDOWN)
+                     '*Телефон*: +7 (925) 730-82-23\n' +
+                     '*Телеграм*: @artur\_turundaev\n' +
+                     '*Почта*: artur.turundaev@gmail.com\n' +
+                     '*Skype*: kiberhetik'
+                     , parse_mode=ParseMode.MARKDOWN)
 
 bot.polling()
